@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark">
+<head>
+    <title>RPG Game</title>
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8">
+                <canvas id="gameCanvas" width="800" height="600"></canvas>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Character Stats</h5>
+                        <div id="stats"></div>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Inventory</h5>
+                        <div id="inventory"></div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <button id="saveGame" class="btn btn-secondary">Save Game</button>
+                    <button id="loadGame" class="btn btn-secondary">Load Game</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/character.js"></script>
+    <script src="/static/js/inventory.js"></script>
+    <script src="/static/js/combat.js"></script>
+    <script src="/static/js/animation.js"></script>
+    <script src="/static/js/game.js"></script>
+</body>
+</html>

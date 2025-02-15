@@ -1,0 +1,13 @@
+#gameCanvas {
+    border: 2px solid var(--bs-secondary);
+    background-color: var(--bs-dark);
+}
+
+.card {
+    background-color: var(--bs-dark);
+    border: 1px solid var(--bs-secondary);
+}
+
+.card-title {
+    color: var(--bs-info);
+}
