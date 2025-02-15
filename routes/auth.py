@@ -2,6 +2,7 @@ from flask import Blueprint, request, render_template, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import User, db
+import logging
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -43,11 +44,16 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
 
+        logging.debug(f"Login attempt for username: {username}")
+
         user = User.query.filter_by(username=username).first()
         if user and check_password_hash(user.password_hash, password):
+            logging.debug("Password verified successfully")
             login_user(user)
-            return redirect(url_for('index'))
-        
+            next_page = request.args.get('next')
+            return redirect(next_page if next_page else url_for('index'))
+
+        logging.debug("Invalid login attempt")
         flash('Invalid username or password')
     return render_template('auth/login.html')
 
