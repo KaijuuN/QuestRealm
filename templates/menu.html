@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark">
+<head>
+    <title>RPG Game - Main Menu</title>
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h1 class="display-4 mb-4">Welcome to RPG Game</h1>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-info">{{ message }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        {% if current_user.is_authenticated %}
+                            <div class="d-grid gap-3">
+                                <a href="{{ url_for('game') }}" class="btn btn-primary btn-lg">Play Game</a>
+                                <a href="{{ url_for('auth.logout') }}" class="btn btn-danger">Logout</a>
+                            </div>
+                        {% else %}
+                            <div class="d-grid gap-3">
+                                <a href="{{ url_for('auth.login') }}" class="btn btn-primary btn-lg">Login</a>
+                                <a href="{{ url_for('auth.register') }}" class="btn btn-secondary btn-lg">Register</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -42,8 +42,12 @@ from routes.auth import auth_bp
 app.register_blueprint(auth_bp)
 
 @app.route('/')
-@login_required
 def index():
+    return render_template('menu.html')
+
+@app.route('/game')
+@login_required
+def game():
     return render_template('index.html')
 
 @app.route('/save', methods=['POST'])
