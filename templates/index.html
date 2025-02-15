@@ -2,17 +2,38 @@
 <html data-bs-theme="dark">
 <head>
     <title>RPG Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
-    <div class="container-fluid mt-4">
-        <div class="row">
+    <div class="container-fluid game-container">
+        <!-- GameBoy-style container for mobile -->
+        <div class="gameboy-container d-lg-none">
+            <div class="gameboy-screen">
+                <canvas id="gameCanvas"></canvas>
+            </div>
+            <div class="gameboy-controls">
+                <div class="d-pad">
+                    <button class="d-pad-up" data-key="ArrowUp">↑</button>
+                    <button class="d-pad-right" data-key="ArrowRight">→</button>
+                    <button class="d-pad-down" data-key="ArrowDown">↓</button>
+                    <button class="d-pad-left" data-key="ArrowLeft">←</button>
+                </div>
+                <div class="action-buttons">
+                    <button class="action-button" data-key="Space">A</button>
+                    <button class="action-button" data-key="KeyE">B</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop layout -->
+        <div class="row d-none d-lg-flex">
             <!-- Game Canvas Area -->
-            <div class="col-md-8">
+            <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
-                        <canvas id="gameCanvas" width="800" height="600" class="border"></canvas>
+                        <canvas id="gameCanvas" class="desktop-canvas"></canvas>
                         <div class="mt-3">
                             <h5>Controls:</h5>
                             <p class="mb-1">WASD or Arrow Keys - Move character</p>
@@ -24,7 +45,7 @@
             </div>
 
             <!-- Game UI Sidebar -->
-            <div class="col-md-4">
+            <div class="col-lg-4">
                 <!-- Character Stats Card -->
                 <div class="card mb-3">
                     <div class="card-header bg-primary text-white">
@@ -70,6 +91,32 @@
                             </button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Stats Toggle -->
+        <button class="btn btn-primary stats-toggle d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#statsOffcanvas">
+            <i class="fas fa-bars"></i> Show Stats
+        </button>
+
+        <!-- Mobile Stats Offcanvas -->
+        <div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="statsOffcanvas">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">Game Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <!-- Mobile Stats Content -->
+                <div id="mobileStats" class="mb-3"></div>
+                <div id="mobileInventory" class="mb-3"></div>
+                <div class="d-grid gap-2">
+                    <button id="mobileSaveGame" class="btn btn-success">Save Game</button>
+                    <button id="mobileLoadGame" class="btn btn-warning">Load Game</button>
+                    <a href="{{ url_for('index') }}" class="btn btn-primary">Back to Menu</a>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                        Logout
+                    </button>
                 </div>
             </div>
         </div>

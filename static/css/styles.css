@@ -1,3 +1,4 @@
+/* Base styles */
 #gameCanvas {
     border: 2px solid var(--bs-secondary);
     background-color: var(--bs-dark);
@@ -10,4 +11,119 @@
 
 .card-title {
     color: var(--bs-info);
+}
+
+/* GameBoy-style container for mobile */
+.gameboy-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #8b8b8b;
+    border-radius: 15px;
+    box-shadow: 
+        inset -4px -4px 0px 0px #373737,
+        inset 4px 4px 0px 0px #dedede;
+}
+
+.gameboy-screen {
+    background-color: #9bbc0f;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.gameboy-screen canvas {
+    width: 100%;
+    height: auto;
+    image-rendering: pixelated;
+    background-color: #0f380f;
+}
+
+/* D-pad styles */
+.gameboy-controls {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.d-pad {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.d-pad button {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #373737;
+    border: none;
+    color: #dedede;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        inset -2px -2px 0px 0px #1a1a1a,
+        inset 2px 2px 0px 0px #4f4f4f;
+}
+
+.d-pad-up { top: 0; left: 40px; border-radius: 5px 5px 0 0; }
+.d-pad-right { top: 40px; right: 0; border-radius: 0 5px 5px 0; }
+.d-pad-down { bottom: 0; left: 40px; border-radius: 0 0 5px 5px; }
+.d-pad-left { top: 40px; left: 0; border-radius: 5px 0 0 5px; }
+
+/* Action buttons */
+.action-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.action-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #a20025;
+    border: none;
+    color: white;
+    font-weight: bold;
+    box-shadow: 
+        inset -2px -2px 0px 0px #800020,
+        inset 2px 2px 0px 0px #ff0033;
+}
+
+/* Mobile stats toggle button */
+.stats-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Desktop specific styles */
+.desktop-canvas {
+    width: 800px;
+    height: 600px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    .game-container {
+        padding: 0;
+    }
+
+    .gameboy-screen canvas {
+        aspect-ratio: 4/3;
+    }
+
+    .action-buttons {
+        align-items: center;
+    }
 }
