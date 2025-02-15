@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, redirect, url_for, flash
+from flask import Blueprint, request, render_template, redirect, url_for, flash, session
 from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import User
@@ -35,6 +35,7 @@ def register():
         db.session.commit()
 
         login_user(user)
+        flash('Registration successful! Welcome to the game.')
         return redirect(url_for('index'))
 
     return render_template('auth/register.html')
@@ -51,6 +52,7 @@ def login():
         if user and check_password_hash(user.password_hash, password):
             logging.debug("Password verified successfully")
             login_user(user)
+            flash('Successfully logged in!')
             next_page = request.args.get('next')
             return redirect(next_page if next_page else url_for('index'))
 
@@ -61,5 +63,13 @@ def login():
 @auth_bp.route('/logout')
 @login_required
 def logout():
+    # Clear game state from session
+    session.pop('game_state', None)
+    # Clear any other game-related session data
+    for key in list(session.keys()):
+        if key.startswith('game_'):
+            session.pop(key, None)
+
     logout_user()
+    flash('You have been successfully logged out.')
     return redirect(url_for('auth.login'))
