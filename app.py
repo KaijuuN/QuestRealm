@@ -34,7 +34,7 @@ def load_user(user_id):
 
 # Create all database tables
 with app.app_context():
-    from models import User, Character, InventoryItem #Added import statements here
+    from models import User, Character, InventoryItem
     db.create_all()
 
 # Register blueprints
@@ -62,5 +62,4 @@ def load_game():
     return jsonify({"status": "no_save"})
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5001))
-    app.run(host="0.0.0.0", port=port, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
