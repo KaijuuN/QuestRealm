@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html data-bs-theme="dark">
+
 <head>
     <title>RPG Game</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
+
 <body>
     <div class="container-fluid game-container">
         <!-- GameBoy-style container for mobile -->
         <div class="gameboy-container d-lg-none">
             <div class="gameboy-screen">
-                <canvas id="gameCanvas"></canvas>
+                <canvas id="gameCanvasMobile"></canvas>
             </div>
             <div class="gameboy-controls">
                 <div class="d-pad">
@@ -33,7 +35,7 @@
             <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
-                        <canvas id="gameCanvas" class="desktop-canvas"></canvas>
+                        <canvas id="gameCanvasDesktop" class="desktop-canvas"></canvas>
                         <div class="mt-3">
                             <h5>Controls:</h5>
                             <p class="mb-1">WASD or Arrow Keys - Move character</p>
@@ -86,7 +88,8 @@
                             <a href="{{ url_for('index') }}" class="btn btn-primary">
                                 <i class="fas fa-arrow-left"></i> Back to Menu
                             </a>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </button>
                         </div>
@@ -96,7 +99,8 @@
         </div>
 
         <!-- Mobile Stats Toggle -->
-        <button class="btn btn-primary stats-toggle d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#statsOffcanvas">
+        <button class="btn btn-primary stats-toggle d-lg-none" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#statsOffcanvas">
             <i class="fas fa-bars"></i> Show Stats
         </button>
 
@@ -151,4 +155,5 @@
     <script src="/static/js/animation.js"></script>
     <script src="/static/js/game.js"></script>
 </body>
+
 </html>

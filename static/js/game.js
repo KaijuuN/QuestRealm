@@ -1,14 +1,21 @@
 class Game {
     constructor() {
-        this.canvas = document.getElementById('gameCanvas');
+        this.canvas = this.getCanvas();
         this.ctx = this.canvas.getContext('2d');
         this.character = new Character();
         this.inventory = new Inventory();
         this.combat = new Combat(this.character);
         this.animation = new Animation(this.ctx);
-        
+
         this.setupEventListeners();
         this.gameLoop();
+    }
+    getCanvas() {
+        if (window.innerWidth <= 768) {
+            return document.getElementById('gameCanvasMobile');
+        } else {
+            return document.getElementById('gameCanvasDesktop');
+        }
     }
 
     setupEventListeners() {
@@ -18,7 +25,7 @@ class Game {
     }
 
     handleInput(e) {
-        switch(e.key) {
+        switch (e.key) {
             case 'ArrowUp':
                 this.character.moveUp();
                 break;
@@ -50,7 +57,7 @@ class Game {
             },
             body: JSON.stringify(gameState)
         });
-        
+
         if (response.ok) {
             alert('Game saved successfully!');
         }
@@ -59,7 +66,7 @@ class Game {
     async loadGame() {
         const response = await fetch('/load');
         const data = await response.json();
-        
+
         if (data.status !== 'no_save') {
             this.character.deserialize(data.character);
             this.inventory.deserialize(data.inventory);
@@ -80,10 +87,10 @@ class Game {
 
     gameLoop() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        
+
         this.animation.drawCharacter(this.character);
         this.updateUI();
-        
+
         requestAnimationFrame(() => this.gameLoop());
     }
 }
